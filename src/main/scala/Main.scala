@@ -5,8 +5,15 @@ object Main extends App {
   println("ETL : Analyse de Films\n")
 
   val etlResult = for {
-    movies <- DataLoader.loadMovies("data/data_clean.json")
-    _ = println(s"${movies.length} films chargés")
+      // Charger données dirty pour produire le log d'erreurs détaillé
+      detailed <- DataLoader.loadMoviesDetailed("data/data_dirty.json")
+      (validFromDirty, errors) = detailed
+      _ = ErrorLogger.writeParsingErrors(errors, "parsing_errors.log")
+      _ = println(s"Log écrit: parsing_errors.log (${errors.length} erreurs)")
+
+      // Charger données clean pour génération de rapport
+      movies <- DataLoader.loadMovies("data/data_dirty.json")
+      _ = println(s"${movies.length} films chargés")
 
     // Statistiques et logs demandés
     stats = StatsCalculator.calculateStats(movies)

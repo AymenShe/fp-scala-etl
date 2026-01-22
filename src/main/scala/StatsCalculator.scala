@@ -53,13 +53,13 @@ object StatsCalculator {
   /**
    * Top N box-office (par revenue)
    */
-  def highestGrossing(movies: List[Movie], n: Int = 10): Seq[MovieSummary] = {
+  def highestGrossing(movies: List[Movie], n: Int = 10): Seq[MovieGrossingSummary] = {
     DataValidator
       .filterValid(movies)
       .filter(_.revenue > 0.0)
       .sortBy(m => -m.revenue)
       .take(n)
-      .map(m => MovieSummary(m.title, m.year, m.rating, m.votes))
+      .map(m => MovieGrossingSummary(m.title, m.year, m.rating, m.votes, m.revenue))
   }
 
   /**
@@ -175,13 +175,12 @@ object StatsCalculator {
     val profitable = withBudgetAndRevenue.filter(m => m.revenue > m.budget)
     val count = profitable.length
     val averageRoi = if (profitable.isEmpty) 0.0
-    
       else profitable.map(m => m.revenue / m.budget).sum / count
     ProfitableMovies(count, averageRoi)
   }
 
   /**
-   * Assemble tous les résultats dans un `MovieResult`
+   * Assemble tous les résultats dans un `AnalysisReport`
    */
   def calculateResults(movies: List[Movie]): AnalysisReport = {
     AnalysisReport(

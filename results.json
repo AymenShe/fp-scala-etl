@@ -134,61 +134,71 @@
       "title" : "Final Mission 73",
       "year" : 1997,
       "rating" : 9.2,
-      "votes" : 138959
+      "votes" : 138959,
+      "revenue" : 1994.5
     },
     {
       "title" : "Broken Dreams 58",
       "year" : 2017,
       "rating" : 8.6,
-      "votes" : 522447
+      "votes" : 522447,
+      "revenue" : 1947.9
     },
     {
       "title" : "Wedding Disaster 89",
       "year" : 2005,
       "rating" : 5.6,
-      "votes" : 1698478
+      "votes" : 1698478,
+      "revenue" : 1900.4
     },
     {
       "title" : "Final Mission 1",
       "year" : 1991,
       "rating" : 9.0,
-      "votes" : 196447
+      "votes" : 196447,
+      "revenue" : 1884.3
     },
     {
       "title" : "Mars Colony 52",
       "year" : 2021,
       "rating" : 8.5,
-      "votes" : 2121711
+      "votes" : 2121711,
+      "revenue" : 1870.4
     },
     {
       "title" : "Dark Secrets 74",
       "year" : 2008,
       "rating" : 7.2,
-      "votes" : 1429082
+      "votes" : 1429082,
+      "revenue" : 1755.8
     },
     {
       "title" : "Night Watch 81",
       "year" : 2011,
       "rating" : 5.8,
-      "votes" : 692966
+      "votes" : 692966,
+      "revenue" : 1754.1
     },
     {
       "title" : "Laugh Out Loud 87",
       "year" : 2008,
       "rating" : 6.9,
-      "votes" : 64727
+      "votes" : 64727,
+      "revenue" : 1699.7
     },
     {
       "title" : "The Last Hope 94",
       "year" : 2023,
       "rating" : 6.9,
-      "votes" : 1146564
+      "votes" : 1146564,
+      "revenue" : 1628.4
     },
     {
       "title" : "Silent Killer 13",
       "year" : 2023,
       "rating" : 6.4,
-      "votes" : 1777819
+      "votes" : 1777819,
+      "revenue" : 1587.3
     }
   ],
   "most_expensive" : [
