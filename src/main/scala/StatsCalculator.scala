@@ -33,10 +33,10 @@ object StatsCalculator {
   def topRated(movies: List[Movie], n: Int = 10, minVotes: Int = 10000): Seq[MovieSummary] = {
     DataValidator
       .filterValid(movies)
-      .filter(_.votes >= minVotes)
-      .sortBy(m => (-m.rating, -m.votes))
+      .filter(m => m.votes.getOrElse(0) >= minVotes)
+      .sortBy(m => (-m.rating.getOrElse(0.0), -m.votes.getOrElse(0)))
       .take(n)
-      .map(m => MovieSummary(m.title, m.year, m.rating, m.votes))
+      .map(m => MovieSummary(m.title.headOption.getOrElse(""), m.year.getOrElse(0), m.rating.getOrElse(0.0), m.votes.getOrElse(0)))
   }
 
   /**
@@ -45,9 +45,9 @@ object StatsCalculator {
   def topByVotes(movies: List[Movie], n: Int = 10): Seq[MovieSummary] = {
     DataValidator
       .filterValid(movies)
-      .sortBy(m => -m.votes)
+      .sortBy(m => -m.votes.getOrElse(0))
       .take(n)
-      .map(m => MovieSummary(m.title, m.year, m.rating, m.votes))
+      .map(m => MovieSummary(m.title.headOption.getOrElse(""), m.year.getOrElse(0), m.rating.getOrElse(0.0), m.votes.getOrElse(0)))
   }
 
   /**
@@ -56,10 +56,10 @@ object StatsCalculator {
   def highestGrossing(movies: List[Movie], n: Int = 10): Seq[MovieGrossingSummary] = {
     DataValidator
       .filterValid(movies)
-      .filter(_.revenue > 0.0)
-      .sortBy(m => -m.revenue)
+      .filter(m => m.revenue.exists(_ > 0.0))
+      .sortBy(m => -m.revenue.getOrElse(0.0))
       .take(n)
-      .map(m => MovieGrossingSummary(m.title, m.year, m.rating, m.votes, m.revenue))
+      .map(m => MovieGrossingSummary(m.title.headOption.getOrElse(""), m.year.getOrElse(0), m.rating.getOrElse(0.0), m.votes.getOrElse(0), m.revenue.getOrElse(0.0)))
   }
 
   /**
@@ -68,10 +68,10 @@ object StatsCalculator {
   def mostExpensive(movies: List[Movie], n: Int = 10): Seq[MovieSummary] = {
     DataValidator
       .filterValid(movies)
-      .filter(_.budget > 0.0)
-      .sortBy(m => -m.budget)
+      .filter(m => m.budget.exists(_ > 0.0))
+      .sortBy(m => -m.budget.getOrElse(0.0))
       .take(n)
-      .map(m => MovieSummary(m.title, m.year, m.rating, m.votes))
+      .map(m => MovieSummary(m.title.headOption.getOrElse(""), m.year.getOrElse(0), m.rating.getOrElse(0.0), m.votes.getOrElse(0)))
   }
 
   /**
@@ -84,7 +84,8 @@ object StatsCalculator {
     }
     DataValidator
       .filterValid(movies)
-      .groupBy(m => decadeLabel(m.year))
+      .flatMap(m => m.year.map(decadeLabel))
+      .groupBy(identity)
       .view
       .mapValues(_.length)
       .toMap
@@ -107,11 +108,10 @@ object StatsCalculator {
    * Note moyenne par genre
    */
   def averageRatingByGenre(movies: List[Movie]): Map[String, Double] = {
-    val byGenre = DataValidator
+    val pairs: List[(String, Double)] = DataValidator
       .filterValid(movies)
-      .flatMap(m => m.genres.map(g => (g, m.rating)))
-      .groupBy(_._1)
-
+      .flatMap(m => m.rating.toList.flatMap(r => m.genres.map(g => (g, r))))
+    val byGenre = pairs.groupBy(_._1)
     byGenre.view.mapValues { xs =>
       val ratings = xs.map(_._2)
       ratings.sum / ratings.length
@@ -122,13 +122,12 @@ object StatsCalculator {
    * Durée moyenne par genre
    */
   def averageRuntimeByGenre(movies: List[Movie]): Map[String, Double] = {
-    val byGenre = DataValidator
+    val pairs: List[(String, Double)] = DataValidator
       .filterValid(movies)
-      .flatMap(m => m.genres.map(g => (g, m.runtime)))
-      .groupBy(_._1)
-
+      .flatMap(m => m.runtime.toList.flatMap(rt => m.genres.map(g => (g, rt.toDouble))))
+    val byGenre = pairs.groupBy(_._1)
     byGenre.view.mapValues { xs =>
-      val runtimes = xs.map(_._2.toDouble)
+      val runtimes = xs.map(_._2)
       runtimes.sum / runtimes.length
     }.toMap
   }
@@ -139,7 +138,8 @@ object StatsCalculator {
   def mostProlificDirectors(movies: List[Movie], top: Int = 5): Seq[ProlificDirector] = {
     DataValidator
       .filterValid(movies)
-      .groupBy(_.director)
+      .flatMap(_.director.toList)
+      .groupBy(identity)
       .view
       .mapValues(_.length)
       .toMap
@@ -171,11 +171,11 @@ object StatsCalculator {
    */
   def profitableMovies(movies: List[Movie]): ProfitableMovies = {
     val valid = DataValidator.filterValid(movies)
-    val withBudgetAndRevenue = valid.filter(m => m.budget > 0.0 && m.revenue > 0.0)
-    val profitable = withBudgetAndRevenue.filter(m => m.revenue > m.budget)
+    val withBudgetAndRevenue = valid.filter(m => m.budget.exists(_ > 0.0) && m.revenue.exists(_ > 0.0))
+    val profitable = withBudgetAndRevenue.filter(m => m.revenue.get > m.budget.get)
     val count = profitable.length
     val averageRoi = if (profitable.isEmpty) 0.0
-      else profitable.map(m => m.revenue / m.budget).sum / count
+      else profitable.map(m => m.revenue.get / m.budget.get).sum / count
     ProfitableMovies(count, averageRoi)
   }
 

@@ -19,16 +19,16 @@ object DataValidator {
     //   - budget est >= 0.0 et non null
     //   - language est non vide
     movie.title.nonEmpty &&
-    movie.year >= 1895 && movie.year <= 2025 &&
-    movie.runtime > 0 &&
+    movie.year.exists(y => y >= 1895 && y <= 2025) &&
+    movie.runtime.exists(_ > 0) &&
     movie.genres.nonEmpty &&
-    movie.director.nonEmpty &&
+    movie.director.exists(_.nonEmpty) &&
     movie.cast.nonEmpty &&
-    movie.rating >= 0.0 && movie.rating <= 10.0 &&
-    movie.votes >= 0 &&
-    movie.budget >= 0.0 &&
-    movie.revenue >= 0.0 &&
-    movie.language.nonEmpty
+    movie.rating.exists(r => r >= 0.0 && r <= 10.0) &&
+    movie.votes.forall(_ >= 0) &&
+    movie.budget.forall(_ >= 0.0) &&
+    movie.revenue.forall(_ >= 0.0) &&
+    movie.language.exists(_.nonEmpty)
   }
 
   /**
