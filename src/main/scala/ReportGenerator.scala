@@ -12,19 +12,8 @@ object ReportGenerator {
   /**
    * Génère le rapport complet
    */
-  def generateReport(restaurants: List[Restaurant]): AnalysisReport = {
-    // TODO: Créer un AnalysisReport en utilisant StatsCalculator
-    //   - statistics = StatsCalculator.calculateStats(...)
-    //   - topRated = StatsCalculator.topRated(..., 3)
-    //   - byCuisine = StatsCalculator.countByCuisine(...)
-    //   - byPriceRange = StatsCalculator.countByPriceRange(...)
-    AnalysisReport(
-        statistics = StatsCalculator.calculateStats(restaurants),
-        topRated = StatsCalculator.topRated(restaurants, 3),
-        byCuisine = StatsCalculator.countByCuisine(restaurants),
-        byPriceRange = StatsCalculator.countByPriceRange(restaurants)
-    )
-  }
+  def generateReport(movies: List[Movie]): AnalysisReport =
+    StatsCalculator.calculateResults(movies)
 
   /**
    * Écrit le rapport en JSON

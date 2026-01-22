@@ -1,61 +1,202 @@
-
 package ETL
 
 object StatsCalculator {
 
   /**
-   * Calcule les statistiques générales
+   * Statistiques générales de parsing et déduplication
    */
   def calculateStats(movies: List[Movie]): MovieStats = {
-    // TODO: Calculer :
-    //   - total : taille de la liste
-    //   - avgRating : somme des ratings / nombre de restaurants
-    //   - vegCount : compter ceux avec vegetarianOptions = true
-    // ATTENTION : gérer le cas liste vide pour éviter division par 0 !
-    if (restaurants.isEmpty) {
-      RestaurantStats(0, 0.0, 0)
-    } else {
-      val total = restaurants.length
-      val avgRating = restaurants.map(_.rating).sum / total
-      val vegCount = restaurants.count(_.vegetarianOptions)
-      RestaurantStats(total, avgRating, vegCount)
-    }
+    val totalParsed = movies.length
+    val validMovies = DataValidator.filterValid(movies)
+    val totalValid = validMovies.length
+    val parsingErrors = totalParsed - totalValid
+    val distinctByIdCount = movies.map(_.id).distinct.length
+    val duplicatesRemoved = totalParsed - distinctByIdCount
+
+    val stats = MovieStats(
+      total_movies_parsed = totalParsed,
+      total_movies_valid = totalValid,
+      parsing_errors = parsingErrors,
+      duplicates_removed = duplicatesRemoved
+    )
+    // // Logs basiques du pipeline ETL
+    // println(s"[ETL] Entrées lues: ${stats.total_movies_parsed}")
+    // println(s"[ETL] Entrées valides: ${stats.total_movies_valid}")
+    // println(s"[ETL] Erreurs: ${stats.parsing_errors}")
+    // println(s"[ETL] Doublons supprimés: ${stats.duplicates_removed}")
+    stats
   }
 
   /**
-   * Top N restaurants par note
+   * Top N films les mieux notés (filtre par `minVotes`)
    */
-  def topRated(restaurants: List[Restaurant], n: Int = 3): List[TopRestaurant] = {
-    // TODO: 
-    //   1. Trier par rating décroissant (utiliser sortBy avec -)
-    //   2. Prendre les n premiers (take)
-    //   3. Mapper vers TopRestaurant
-    restaurants
-      .sortBy(- _.rating)
+  def topRated(movies: List[Movie], n: Int = 10, minVotes: Int = 10000): Seq[MovieSummary] = {
+    DataValidator
+      .filterValid(movies)
+      .filter(_.votes >= minVotes)
+      .sortBy(m => (-m.rating, -m.votes))
       .take(n)
-      .map(r => TopRestaurant(r.name, r.rating))
+      .map(m => MovieSummary(m.title, m.year, m.rating, m.votes))
   }
 
   /**
-   * Compte par type de cuisine
+   * Top N films par nombre de votes
    */
-  def countByCuisine(restaurants: List[Restaurant]): Map[String, Int] = {
-    // TODO: 
-    //   1. Grouper par cuisine (groupBy)
-    //   2. Compter la taille de chaque groupe (map)
-    restaurants
-      .groupBy(_.cuisine)
-      .map { case (cuisine, group) => (cuisine, group.length) }
+  def topByVotes(movies: List[Movie], n: Int = 10): Seq[MovieSummary] = {
+    DataValidator
+      .filterValid(movies)
+      .sortBy(m => -m.votes)
+      .take(n)
+      .map(m => MovieSummary(m.title, m.year, m.rating, m.votes))
   }
 
   /**
-   * Compte par gamme de prix
+   * Top N box-office (par revenue)
    */
-  def countByPriceRange(restaurants: List[Restaurant]): Map[String, Int] = {
-    // TODO: Comme countByCuisine mais grouper par priceRange
-    // ATTENTION : convertir priceRange en String pour la Map
-    restaurants
-      .groupBy(r => r.priceRange.toString)
-      .map { case (priceRange, group) => (priceRange, group.length) }
+  def highestGrossing(movies: List[Movie], n: Int = 10): Seq[MovieSummary] = {
+    DataValidator
+      .filterValid(movies)
+      .filter(_.revenue > 0.0)
+      .sortBy(m => -m.revenue)
+      .take(n)
+      .map(m => MovieSummary(m.title, m.year, m.rating, m.votes))
+  }
+
+  /**
+   * Top N budgets
+   */
+  def mostExpensive(movies: List[Movie], n: Int = 10): Seq[MovieSummary] = {
+    DataValidator
+      .filterValid(movies)
+      .filter(_.budget > 0.0)
+      .sortBy(m => -m.budget)
+      .take(n)
+      .map(m => MovieSummary(m.title, m.year, m.rating, m.votes))
+  }
+
+  /**
+   * Compte des films par décennie ("1990s", "2000s", ...)
+   */
+  def moviesByDecade(movies: List[Movie]): Map[String, Int] = {
+    def decadeLabel(y: Int): String = {
+      val base = (y / 10) * 10
+      s"${base}s"
+    }
+    DataValidator
+      .filterValid(movies)
+      .groupBy(m => decadeLabel(m.year))
+      .view
+      .mapValues(_.length)
+      .toMap
+  }
+
+  /**
+   * Compte des films par genre (chaque film peut appartenir à plusieurs genres)
+   */
+  def moviesByGenre(movies: List[Movie]): Map[String, Int] = {
+    DataValidator
+      .filterValid(movies)
+      .flatMap(_.genres)
+      .groupBy(identity)
+      .view
+      .mapValues(_.length)
+      .toMap
+  }
+
+  /**
+   * Note moyenne par genre
+   */
+  def averageRatingByGenre(movies: List[Movie]): Map[String, Double] = {
+    val byGenre = DataValidator
+      .filterValid(movies)
+      .flatMap(m => m.genres.map(g => (g, m.rating)))
+      .groupBy(_._1)
+
+    byGenre.view.mapValues { xs =>
+      val ratings = xs.map(_._2)
+      ratings.sum / ratings.length
+    }.toMap
+  }
+
+  /**
+   * Durée moyenne par genre
+   */
+  def averageRuntimeByGenre(movies: List[Movie]): Map[String, Double] = {
+    val byGenre = DataValidator
+      .filterValid(movies)
+      .flatMap(m => m.genres.map(g => (g, m.runtime)))
+      .groupBy(_._1)
+
+    byGenre.view.mapValues { xs =>
+      val runtimes = xs.map(_._2.toDouble)
+      runtimes.sum / runtimes.length
+    }.toMap
+  }
+
+  /**
+   * Top réalisateurs les plus prolifiques
+   */
+  def mostProlificDirectors(movies: List[Movie], top: Int = 5): Seq[ProlificDirector] = {
+    DataValidator
+      .filterValid(movies)
+      .groupBy(_.director)
+      .view
+      .mapValues(_.length)
+      .toMap
+      .toSeq
+      .sortBy{ case (_, count) => -count }
+      .take(top)
+      .map{ case (dir, count) => ProlificDirector(dir, count) }
+  }
+
+  /**
+   * Top acteurs les plus fréquents
+   */
+  def mostFrequentActors(movies: List[Movie], top: Int = 5): Seq[FrequentActor] = {
+    DataValidator
+      .filterValid(movies)
+      .flatMap(_.cast)
+      .groupBy(identity)
+      .view
+      .mapValues(_.length)
+      .toMap
+      .toSeq
+      .sortBy{ case (_, count) => -count }
+      .take(top)
+      .map{ case (actor, count) => FrequentActor(actor, count) }
+  }
+
+  /**
+   * Compte des films rentables et ROI moyen (revenue/budget)
+   */
+  def profitableMovies(movies: List[Movie]): ProfitableMovies = {
+    val valid = DataValidator.filterValid(movies)
+    val withBudgetAndRevenue = valid.filter(m => m.budget > 0.0 && m.revenue > 0.0)
+    val profitable = withBudgetAndRevenue.filter(m => m.revenue > m.budget)
+    val count = profitable.length
+    val averageRoi = if (profitable.isEmpty) 0.0
+    
+      else profitable.map(m => m.revenue / m.budget).sum / count
+    ProfitableMovies(count, averageRoi)
+  }
+
+  /**
+   * Assemble tous les résultats dans un `MovieResult`
+   */
+  def calculateResults(movies: List[Movie]): AnalysisReport = {
+    AnalysisReport(
+      statistics = calculateStats(movies),
+      top_10_rated = topRated(movies, 10),
+      top_10_by_votes = topByVotes(movies, 10),
+      highest_grossing = highestGrossing(movies, 10),
+      most_expensive = mostExpensive(movies, 10),
+      movies_by_decade = moviesByDecade(movies),
+      movies_by_genre = moviesByGenre(movies),
+      average_rating_by_genre = averageRatingByGenre(movies),
+      average_runtime_by_genre = averageRuntimeByGenre(movies),
+      most_prolific_directors = mostProlificDirectors(movies, 5),
+      most_frequent_actors = mostFrequentActors(movies, 5),
+      profitable_movies = profitableMovies(movies)
+    )
   }
 }

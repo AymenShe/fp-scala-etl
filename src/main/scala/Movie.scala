@@ -8,8 +8,8 @@ case class Movie(
   genres: List[String],
   director: String,
   cast: List[String],
-  rating: Double
-  votes: Int
+  rating: Double,
+  votes: Int,
   revenue: Double,
   budget : Double,
   language: String 
@@ -44,7 +44,7 @@ case class ProfitableMovies(
   average_roi: Double
 )
 
-case class MovieResult(
+case class AnalysisReport(
   statistics: MovieStats,
   top_10_rated: Seq[MovieSummary],
   top_10_by_votes: Seq[MovieSummary],

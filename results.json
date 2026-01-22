@@ -1,0 +1,346 @@
+{
+  "statistics" : {
+    "total_movies_parsed" : 100,
+    "total_movies_valid" : 42,
+    "parsing_errors" : 58,
+    "duplicates_removed" : 0
+  },
+  "top_10_rated" : [
+    {
+      "title" : "Hidden Truth 49",
+      "year" : 1996,
+      "rating" : 9.4,
+      "votes" : 2102764
+    },
+    {
+      "title" : "Star Voyager 52",
+      "year" : 1995,
+      "rating" : 9.4,
+      "votes" : 717638
+    },
+    {
+      "title" : "Broken Dreams 86",
+      "year" : 2008,
+      "rating" : 9.4,
+      "votes" : 257002
+    },
+    {
+      "title" : "Final Mission 73",
+      "year" : 1997,
+      "rating" : 9.2,
+      "votes" : 138959
+    },
+    {
+      "title" : "Office Madness 78",
+      "year" : 2001,
+      "rating" : 9.1,
+      "votes" : 2197569
+    },
+    {
+      "title" : "Final Hour 12",
+      "year" : 2005,
+      "rating" : 9.1,
+      "votes" : 1190115
+    },
+    {
+      "title" : "AI Revolution 1",
+      "year" : 2013,
+      "rating" : 9.0,
+      "votes" : 2807784
+    },
+    {
+      "title" : "Tomorrow's Promise 53",
+      "year" : 2020,
+      "rating" : 9.0,
+      "votes" : 1921243
+    },
+    {
+      "title" : "Final Mission 1",
+      "year" : 1991,
+      "rating" : 9.0,
+      "votes" : 196447
+    },
+    {
+      "title" : "Office Madness 75",
+      "year" : 2011,
+      "rating" : 8.7,
+      "votes" : 2298609
+    }
+  ],
+  "top_10_by_votes" : [
+    {
+      "title" : "Time Traveler 2",
+      "year" : 1997,
+      "rating" : 6.7,
+      "votes" : 2942903
+    },
+    {
+      "title" : "Steel Fury 71",
+      "year" : 2000,
+      "rating" : 8.1,
+      "votes" : 2882917
+    },
+    {
+      "title" : "Quantum Leap 92",
+      "year" : 2017,
+      "rating" : 7.0,
+      "votes" : 2844850
+    },
+    {
+      "title" : "AI Revolution 1",
+      "year" : 2013,
+      "rating" : 9.0,
+      "votes" : 2807784
+    },
+    {
+      "title" : "Lost Memories 98",
+      "year" : 2011,
+      "rating" : 8.4,
+      "votes" : 2620170
+    },
+    {
+      "title" : "Love & Chaos 29",
+      "year" : 2003,
+      "rating" : 5.9,
+      "votes" : 2451661
+    },
+    {
+      "title" : "Deadly Game 19",
+      "year" : 2005,
+      "rating" : 7.0,
+      "votes" : 2386698
+    },
+    {
+      "title" : "Cyber Reality 34",
+      "year" : 2022,
+      "rating" : 5.9,
+      "votes" : 2344185
+    },
+    {
+      "title" : "Night Watch 37",
+      "year" : 2013,
+      "rating" : 5.9,
+      "votes" : 2334234
+    },
+    {
+      "title" : "Office Madness 75",
+      "year" : 2011,
+      "rating" : 8.7,
+      "votes" : 2298609
+    }
+  ],
+  "highest_grossing" : [
+    {
+      "title" : "Final Mission 73",
+      "year" : 1997,
+      "rating" : 9.2,
+      "votes" : 138959
+    },
+    {
+      "title" : "Broken Dreams 58",
+      "year" : 2017,
+      "rating" : 8.6,
+      "votes" : 522447
+    },
+    {
+      "title" : "Wedding Disaster 89",
+      "year" : 2005,
+      "rating" : 5.6,
+      "votes" : 1698478
+    },
+    {
+      "title" : "Final Mission 1",
+      "year" : 1991,
+      "rating" : 9.0,
+      "votes" : 196447
+    },
+    {
+      "title" : "Mars Colony 52",
+      "year" : 2021,
+      "rating" : 8.5,
+      "votes" : 2121711
+    },
+    {
+      "title" : "Dark Secrets 74",
+      "year" : 2008,
+      "rating" : 7.2,
+      "votes" : 1429082
+    },
+    {
+      "title" : "Night Watch 81",
+      "year" : 2011,
+      "rating" : 5.8,
+      "votes" : 692966
+    },
+    {
+      "title" : "Laugh Out Loud 87",
+      "year" : 2008,
+      "rating" : 6.9,
+      "votes" : 64727
+    },
+    {
+      "title" : "The Last Hope 94",
+      "year" : 2023,
+      "rating" : 6.9,
+      "votes" : 1146564
+    },
+    {
+      "title" : "Silent Killer 13",
+      "year" : 2023,
+      "rating" : 6.4,
+      "votes" : 1777819
+    }
+  ],
+  "most_expensive" : [
+    {
+      "title" : "Lost Memories 84",
+      "year" : 1993,
+      "rating" : 6.9,
+      "votes" : 606573
+    },
+    {
+      "title" : "Eternal Light 15",
+      "year" : 2010,
+      "rating" : 6.8,
+      "votes" : 424143
+    },
+    {
+      "title" : "Silent Killer 13",
+      "year" : 2023,
+      "rating" : 6.4,
+      "votes" : 1777819
+    },
+    {
+      "title" : "Final Mission 1",
+      "year" : 1991,
+      "rating" : 9.0,
+      "votes" : 196447
+    },
+    {
+      "title" : "Office Madness 78",
+      "year" : 2001,
+      "rating" : 9.1,
+      "votes" : 2197569
+    },
+    {
+      "title" : "Broken Dreams 86",
+      "year" : 2008,
+      "rating" : 9.4,
+      "votes" : 257002
+    },
+    {
+      "title" : "Mars Colony 94",
+      "year" : 1999,
+      "rating" : 8.1,
+      "votes" : 1828397
+    },
+    {
+      "title" : "Cyber Reality 34",
+      "year" : 2022,
+      "rating" : 5.9,
+      "votes" : 2344185
+    },
+    {
+      "title" : "Night Watch 81",
+      "year" : 2011,
+      "rating" : 5.8,
+      "votes" : 692966
+    },
+    {
+      "title" : "Mars Colony 20",
+      "year" : 2019,
+      "rating" : 5.8,
+      "votes" : 1507269
+    }
+  ],
+  "movies_by_decade" : {
+    "2020s" : 9,
+    "1990s" : 9,
+    "2000s" : 13,
+    "2010s" : 11
+  },
+  "movies_by_genre" : {
+    "Thriller" : 17,
+    "Horror" : 6,
+    "Romance" : 7,
+    "Drama" : 11,
+    "Mystery" : 6,
+    "Sci-Fi" : 6,
+    "Adventure" : 4,
+    "Action" : 15,
+    "Biography" : 2,
+    "Comedy" : 4
+  },
+  "average_rating_by_genre" : {
+    "Thriller" : 7.676470588235294,
+    "Horror" : 8.049999999999999,
+    "Romance" : 8.071428571428571,
+    "Drama" : 7.245454545454546,
+    "Mystery" : 7.233333333333333,
+    "Sci-Fi" : 7.583333333333333,
+    "Adventure" : 7.075000000000001,
+    "Action" : 7.506666666666667,
+    "Biography" : 6.75,
+    "Comedy" : 8.0
+  },
+  "average_runtime_by_genre" : {
+    "Thriller" : 128.7058823529412,
+    "Horror" : 129.33333333333334,
+    "Romance" : 146.57142857142858,
+    "Drama" : 130.54545454545453,
+    "Mystery" : 117.83333333333333,
+    "Sci-Fi" : 136.16666666666666,
+    "Adventure" : 124.0,
+    "Action" : 134.53333333333333,
+    "Biography" : 136.5,
+    "Comedy" : 145.5
+  },
+  "most_prolific_directors" : [
+    {
+      "director" : "Alfonso Cuarón",
+      "count" : 7
+    },
+    {
+      "director" : "Martin Scorsese",
+      "count" : 5
+    },
+    {
+      "director" : "David Fincher",
+      "count" : 4
+    },
+    {
+      "director" : "Christopher Nolan",
+      "count" : 4
+    },
+    {
+      "director" : "Steven Spielberg",
+      "count" : 3
+    }
+  ],
+  "most_frequent_actors" : [
+    {
+      "actor" : "Scarlett Johansson",
+      "count" : 15
+    },
+    {
+      "actor" : "Leonardo DiCaprio",
+      "count" : 14
+    },
+    {
+      "actor" : "Tom Cruise",
+      "count" : 14
+    },
+    {
+      "actor" : "Will Smith",
+      "count" : 13
+    },
+    {
+      "actor" : "Meryl Streep",
+      "count" : 12
+    }
+  ],
+  "profitable_movies" : {
+    "count" : 39,
+    "average_roi" : 23.783063837215913
+  }
+}
