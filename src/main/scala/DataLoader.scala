@@ -1,4 +1,4 @@
-package miniEtl
+package ETL
 
 import io.circe._
 import io.circe.generic.auto._
@@ -9,14 +9,14 @@ import scala.util.{Try, Success, Failure}
 object DataLoader {
 
   /**
-   * Lit un fichier JSON et parse les restaurants
+   * Lit un fichier JSON et parse les movies
    */
-  def loadMovies(filename: String): Either[String, List[Restaurant]] = {
+  def loadMovies(filename: String): Either[String, List[Movie]] = {
     // TODO: Utiliser Try pour lire le fichier
     //   1. Créer un Source.fromFile(filename)
     //   2. Lire le contenu avec source.mkString
     //   3. Fermer le fichier avec source.close() - IMPORTANT !
-    //   4. Parser avec decode[List[Restaurant]](content)
+    //   4. Parser avec decode[List[Movie]](content)
     //   5. Gérer les erreurs avec pattern matching
     val file = Try {
         val source = Source.fromFile(filename)
@@ -24,8 +24,8 @@ object DataLoader {
         finally source.close()
     }
     file match {
-      case Success(content) => decode[List[Restaurant]](content) match {
-        case Right(restaurants) => Right(restaurants)
+      case Success(content) => decode[List[Movie]](content) match {
+        case Right(movies) => Right(movies)
         case Left(error) => Left(s"Erreur de parsing JSON: ${error.getMessage}")
       }
       case Failure(exception) => Left(s"Erreur de lecture du fichier: ${exception.getMessage}")
