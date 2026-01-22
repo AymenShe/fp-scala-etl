@@ -1,11 +1,42 @@
 package ETL
 
 import io.circe.generic.auto._
+import io.circe.{Decoder, HCursor}
 import io.circe.parser._
 import scala.io.Source
 import scala.util.{Try, Success, Failure}
 
 object DataLoader {
+  // Decoder personnalisé pour accepter `title` en chaîne et le normaliser en List[String]
+  implicit val movieDecoder: Decoder[Movie] = new Decoder[Movie] {
+    def apply(c: HCursor) = for {
+      id        <- c.downField("id").as[Option[Int]]
+      titleStr  <- c.downField("title").as[Option[String]]
+      year      <- c.downField("year").as[Option[Int]]
+      runtime   <- c.downField("runtime").as[Option[Int]]
+      genresOpt <- c.downField("genres").as[Option[List[String]]]
+      director  <- c.downField("director").as[Option[String]]
+      castOpt   <- c.downField("cast").as[Option[List[String]]]
+      rating    <- c.downField("rating").as[Option[Double]]
+      votes     <- c.downField("votes").as[Option[Int]]
+      revenue   <- c.downField("revenue").as[Option[Double]]
+      budget    <- c.downField("budget").as[Option[Double]]
+      language  <- c.downField("language").as[Option[String]]
+    } yield Movie(
+      id = id,
+      title = titleStr.toList,
+      year = year,
+      runtime = runtime,
+      genres = genresOpt.getOrElse(Nil),
+      director = director,
+      cast = castOpt.getOrElse(Nil),
+      rating = rating,
+      votes = votes,
+      revenue = revenue,
+      budget = budget,
+      language = language
+    )
+  }
 
   /**
    * Lit un fichier JSON propre et parse directement les movies

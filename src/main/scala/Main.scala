@@ -6,13 +6,13 @@ object Main extends App {
 
   val etlResult = for {
       // Charger données dirty pour produire le log d'erreurs détaillé
-      detailed <- DataLoader.loadMoviesDetailed("data/data_dirty.json")
+      detailed <- DataLoader.loadMoviesDetailed("data/data_large.json")
       (validFromDirty, errors) = detailed
       _ = ErrorLogger.writeParsingErrors(errors, "parsing_errors.log")
       _ = println(s"Log écrit: parsing_errors.log (${errors.length} erreurs)")
 
       // Charger données clean pour génération de rapport
-      movies <- DataLoader.loadMovies("data/data_dirty.json")
+      movies <- DataLoader.loadMovies("data/data_large.json")
       _ = println(s"${movies.length} films chargés")
 
     // Statistiques et logs demandés

@@ -4,47 +4,59 @@ object MovieParser {
   def fromInput(input: MovieInput): Either[List[String], Movie] = {
     val errors = scala.collection.mutable.ListBuffer.empty[String]
 
-    val id = input.id.getOrElse({ errors += "id manquant"; -1 })
-    val title = input.title.getOrElse({ errors += "title manquant ou vide"; "" })
-    val year = input.year.getOrElse({ errors += "year manquant"; -1 })
-    val runtime = input.runtime.getOrElse({ errors += "runtime manquant"; -1 })
-    val genres = input.genres.getOrElse({ errors += "genres manquant"; Nil })
-    val director = input.director.getOrElse({ errors += "director manquant ou vide"; "" })
-    val cast = input.cast.getOrElse({ errors += "cast manquant"; Nil })
-    val rating = input.rating.getOrElse({ errors += "rating manquant"; -1.0 })
-    val votes = input.votes.getOrElse({ errors += "votes manquant"; -1 })
-    val revenue = input.revenue.getOrElse({ errors += "revenue manquant"; -1.0 })
-    val budget = input.budget.getOrElse({ errors += "budget manquant"; -1.0 })
-    val language = input.language.getOrElse({ errors += "language manquant ou vide"; "" })
+    // Champs optionnels (ne pas compter comme erreur s'ils sont absents)
+    val idOpt = input.id.filter(_ >= 0)
+    if (input.id.exists(_ < 0)) errors += s"id invalide: ${input.id.get}"
 
-    // Règles métier (détaillées pour messages clairs)
-    if (title.isEmpty) errors += "title vide"
+    val votesOpt = input.votes.filter(_ >= 0)
+    if (input.votes.exists(_ < 0)) errors += s"votes invalide: ${input.votes.get}"
+
+    val revenueOpt = input.revenue.filter(_ >= 0.0)
+    if (input.revenue.exists(_ < 0.0)) errors += s"revenue invalide: ${input.revenue.get}"
+
+    val budgetOpt = input.budget.filter(_ >= 0.0)
+    if (input.budget.exists(_ < 0.0)) errors += s"budget invalide: ${input.budget.get}"
+
+    // Champs requis
+    val title = input.title.getOrElse("")
+    if (title.isEmpty) errors += "title manquant ou vide"
+
+    val year = input.year.getOrElse(-1)
     if (year < 1895 || year > 2025) errors += s"year invalide: $year"
+
+    val runtime = input.runtime.getOrElse(-1)
     if (runtime <= 0) errors += s"runtime invalide: $runtime"
-    if (genres.isEmpty) errors += "genres vide"
-    if (director.isEmpty) errors += "director vide"
-    if (cast.isEmpty) errors += "cast vide"
+
+    val genres = input.genres.getOrElse(Nil)
+    if (genres.isEmpty) errors += "genres manquant ou vide"
+
+    val director = input.director.getOrElse("")
+    if (director.isEmpty) errors += "director manquant ou vide"
+
+    val cast = input.cast.getOrElse(Nil)
+    if (cast.isEmpty) errors += "cast manquant ou vide"
+
+    val rating = input.rating.getOrElse(-1.0)
     if (rating < 0.0 || rating > 10.0) errors += s"rating invalide: $rating"
-    if (votes < 0) errors += s"votes invalide: $votes"
-    if (revenue < 0.0) errors += s"revenue invalide: $revenue"
-    if (budget < 0.0) errors += s"budget invalide: $budget"
-    if (language.isEmpty) errors += "language vide"
+
+    val language = input.language.getOrElse("")
+    if (language.isEmpty) errors += "language manquant ou vide"
 
     if (errors.nonEmpty) Left(errors.toList)
     else Right(
       Movie(
-        id = id,
-        title = title,
-        year = year,
-        runtime = runtime,
+        id = idOpt,
+        title = List(title),
+        year = Some(year),
+        runtime = Some(runtime),
         genres = genres,
-        director = director,
+        director = Some(director),
         cast = cast,
-        rating = rating,
-        votes = votes,
-        revenue = revenue,
-        budget = budget,
-        language = language
+        rating = Some(rating),
+        votes = votesOpt,
+        revenue = revenueOpt,
+        budget = budgetOpt,
+        language = Some(language)
       )
     )
   }

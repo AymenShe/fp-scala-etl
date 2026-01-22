@@ -1,43 +1,31 @@
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/StatsCalculator.scala:185:46: not found: type MovieResult
-[error]   def calculateResults(movies: List[Movie]): MovieResult = {
-[error]                                              ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/StatsCalculator.scala:186:5: not found: value MovieResult
-[error]     MovieResult(
-[error]     ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/StatsCalculator.scala:187:7: not found: value statistics
-[error]       statistics = calculateStats(movies),
-[error]       ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/StatsCalculator.scala:188:7: not found: value top_10_rated
-[error]       top_10_rated = topRated(movies, 10),
-[error]       ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/StatsCalculator.scala:189:7: not found: value top_10_by_votes
-[error]       top_10_by_votes = topByVotes(movies, 10),
-[error]       ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/StatsCalculator.scala:190:7: not found: value highest_grossing
-[error]       highest_grossing = highestGrossing(movies, 10),
-[error]       ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/StatsCalculator.scala:191:7: not found: value most_expensive
-[error]       most_expensive = mostExpensive(movies, 10),
-[error]       ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/StatsCalculator.scala:192:7: not found: value movies_by_decade
-[error]       movies_by_decade = moviesByDecade(movies),
-[error]       ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/StatsCalculator.scala:193:7: not found: value movies_by_genre
-[error]       movies_by_genre = moviesByGenre(movies),
-[error]       ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/StatsCalculator.scala:194:7: not found: value average_rating_by_genre
-[error]       average_rating_by_genre = averageRatingByGenre(movies),
-[error]       ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/StatsCalculator.scala:195:7: not found: value average_runtime_by_genre
-[error]       average_runtime_by_genre = averageRuntimeByGenre(movies),
-[error]       ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/StatsCalculator.scala:196:7: not found: value most_prolific_directors
-[error]       most_prolific_directors = mostProlificDirectors(movies, 5),
-[error]       ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/StatsCalculator.scala:197:7: not found: value most_frequent_actors
-[error]       most_frequent_actors = mostFrequentActors(movies, 5),
-[error]       ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/StatsCalculator.scala:198:7: not found: value profitable_movies
-[error]       profitable_movies = profitableMovies(movies)
-[error]       ^
-[error] 14 errors found
+[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/MovieParser.scala:49:17: type mismatch;
+[error]  found   : String
+[error]  required: List[String]
+[error]         title = title,
+[error]                 ^
+[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/MovieParser.scala:50:16: type mismatch;
+[error]  found   : Int
+[error]  required: Option[Int]
+[error]         year = year,
+[error]                ^
+[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/MovieParser.scala:51:19: type mismatch;
+[error]  found   : Int
+[error]  required: Option[Int]
+[error]         runtime = runtime,
+[error]                   ^
+[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/MovieParser.scala:53:20: type mismatch;
+[error]  found   : String
+[error]  required: Option[String]
+[error]         director = director,
+[error]                    ^
+[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/MovieParser.scala:55:18: type mismatch;
+[error]  found   : Double
+[error]  required: Option[Double]
+[error]         rating = rating,
+[error]                  ^
+[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/MovieParser.scala:59:20: type mismatch;
+[error]  found   : String
+[error]  required: Option[String]
+[error]         language = language
+[error]                    ^
+[error] 6 errors found
