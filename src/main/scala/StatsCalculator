@@ -4,7 +4,6 @@ object StatsCalculator {
   private def round2(d: Double): Double =
     BigDecimal(d).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
 
-
   /**
    * Statistiques générales de parsing et déduplication
    */

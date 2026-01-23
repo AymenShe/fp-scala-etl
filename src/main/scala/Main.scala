@@ -3,6 +3,7 @@ package ETL
 object Main extends App {
 
   println("ETL : Analyse de Films\n")
+  val start = System.currentTimeMillis()
 
   val etlResult = for {
       // Charger données dirty pour produire le log d'erreurs détaillé
@@ -28,8 +29,12 @@ object Main extends App {
 
     report = ReportGenerator.generateReport(movies)
     _ <- ReportGenerator.writeReport(report, "output/results.json")
-    _ = println("Rapport écrit dans output/results.json")
+    _ = println("\nRapport écrit dans output/results.json")
   } yield report
+
+
+  val duration = (System.currentTimeMillis() - start) / 1000.0
+  println(f"Traitement effectué en $duration%.3f secondes")
 
   etlResult match {
     case Right(_) =>
