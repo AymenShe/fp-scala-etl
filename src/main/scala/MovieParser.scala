@@ -1,6 +1,9 @@
 package ETL
 
 object MovieParser {
+  private def round2(d: Double): Double =
+    BigDecimal(d).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
+
   def fromInput(input: MovieInput): Either[List[String], Movie] = {
     val errors = scala.collection.mutable.ListBuffer.empty[String]
 
@@ -37,7 +40,7 @@ object MovieParser {
     if (cast.isEmpty) errors += "cast manquant ou vide"
 
     val rating = input.rating.getOrElse(-1.0)
-    if (rating < 0.0 || rating > 10.0) errors += s"rating invalide: $rating"
+    if (rating < 0.0 || rating > 10.0) errors += s"rating invalide: ${round2(rating)}"
 
     val language = input.language.getOrElse("")
     if (language.isEmpty) errors += "language manquant ou vide"

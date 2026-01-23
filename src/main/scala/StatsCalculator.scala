@@ -10,11 +10,15 @@ object StatsCalculator {
    */
   def calculateStats(movies: List[Movie]): MovieStats = {
     val totalParsed = movies.length
-    val validMovies = DataValidator.filterValid(movies)
-    val totalValid = validMovies.length
-    val parsingErrors = totalParsed - totalValid
+    // invalid entries based on validation rules (without considering duplicates)
+    val invalidCount = movies.count(m => !DataValidator.isValid(m))
+    // compute unique valid movies count
+    val totalValid = movies.filter(DataValidator.isValid).distinctBy(_.id).length
+    // duplicates count computed from raw ids
     val distinctByIdCount = movies.map(_.id).distinct.length
     val duplicatesRemoved = totalParsed - distinctByIdCount
+    // parsing errors should reflect only invalid data, not duplicates
+    val parsingErrors = invalidCount
 
     val stats = MovieStats(
       total_movies_parsed = totalParsed,

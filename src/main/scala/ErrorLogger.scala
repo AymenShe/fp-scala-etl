@@ -8,7 +8,7 @@ object ErrorLogger {
     val header = "PARSED ERRORS LOG\n=================\n"
     val body = errors.map { e =>
       val msgs = e.messages.mkString("; ")
-      s"[index=${e.index}] title='${e.titleHint}' :: ${msgs}"
+      s"[id=${e.index}] title='${e.titleHint}' :: ${msgs}"
     }.mkString("\n")
     val content = header + body + "\n"
     try {
