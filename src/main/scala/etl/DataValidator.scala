@@ -7,16 +7,16 @@ object DataValidator {
    */
   def isValid(movie: Movie): Boolean = {
     movie.title.nonEmpty &&
-    movie.year.exists(y => y >= 1895 && y <= 2025) &&
-    movie.runtime.exists(_ > 0) &&
+    movie.year >= 1895 && movie.year <= 2025 &&
+    movie.runtime > 0 &&
     movie.genres.nonEmpty &&
-    movie.director.exists(_.nonEmpty) &&
+    movie.director.nonEmpty &&
     movie.cast.nonEmpty &&
-    movie.rating.exists(r => r >= 0.0 && r <= 10.0) &&
-    movie.votes.forall(_ >= 0) &&
+    movie.rating >= 0.0 && movie.rating <= 10.0 &&
+    movie.votes >= 0 &&
     movie.budget.forall(_ >= 0.0) &&
     movie.revenue.forall(_ >= 0.0) &&
-    movie.language.exists(_.nonEmpty)
+    movie.language.nonEmpty
   }
 
   /**

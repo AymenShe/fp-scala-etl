@@ -12,10 +12,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/MovieParser.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/ReportGenerator$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/ReportGenerator$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ETL/ErrorLogger$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/ErrorLogger$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ETL/DataLoader$$anonfun$2.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/DataLoader$$anonfun$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/MovieGrossingSummary$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/MovieGrossingSummary$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/Movie.class[0m
@@ -30,8 +26,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/AnalysisReport.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/ReportGenerator.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/ReportGenerator.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ETL/DataLoader$$anon$1.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/DataLoader$$anon$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/FrequentActor.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/FrequentActor.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/StatsCalculator.class[0m
@@ -42,8 +36,6 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/ProfitableMovies$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/DataValidator.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/DataValidator.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ETL/DataLoader$$anonfun$1.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/DataLoader$$anonfun$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/ReportGenerator$anon$importedEncoder$macro$139$1$$anon$7.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/ReportGenerator$anon$importedEncoder$macro$139$1$$anon$7.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/AnalysisReport$.class[0m
@@ -54,30 +46,24 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/ReportGenerator$anon$importedEncoder$macro$139$1$$anon$5.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/ProlificDirector$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/ProlificDirector$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ETL/ParsingError$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/ParsingError$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/ReportGenerator$anon$importedEncoder$macro$139$1$$anon$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/ReportGenerator$anon$importedEncoder$macro$139$1$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ETL/LoadResult$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/LoadResult$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/ReportGenerator$anon$importedEncoder$macro$139$1$$anon$3.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/ReportGenerator$anon$importedEncoder$macro$139$1$$anon$3.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ETL/DataLoader$anon$importedDecoder$macro$51$1$$anon$2.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/DataLoader$anon$importedDecoder$macro$51$1$$anon$2.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/MovieStats$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/MovieStats$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ETL/MovieInput$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/MovieInput$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/ReportGenerator$anon$importedEncoder$macro$139$1$$anon$4.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/ReportGenerator$anon$importedEncoder$macro$139$1$$anon$4.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ETL/ErrorLogger.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/ErrorLogger.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/Main.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/Main.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ETL/MovieInput.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/MovieInput.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/StatsCalculator$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/StatsCalculator$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/Main$delayedInit$body.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/Main$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ETL/LoadResult.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/LoadResult.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/DataLoader.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/DataLoader.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/ProfitableMovies.class[0m
@@ -94,8 +80,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/MovieSummary.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/ProlificDirector.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/ProlificDirector.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	ETL/ParsingError.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/ParsingError.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ETL/DataLoader$anon$importedDecoder$macro$51$1$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/DataLoader$anon$importedDecoder$macro$51$1$$anon$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ETL/ReportGenerator$anon$importedEncoder$macro$139$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/target/scala-2.13/classes/ETL/ReportGenerator$anon$importedEncoder$macro$139$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m

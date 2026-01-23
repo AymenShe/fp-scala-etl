@@ -1,18 +1,18 @@
 package ETL
 
 case class Movie(
-  id: Option[Int],
-  title: List[String],
-  year: Option[Int],
-  runtime: Option[Int],
+  id: Int,
+  title: String,
+  year: Int,
+  runtime: Int,
   genres: List[String],
-  director: Option[String],
+  director: String,
   cast: List[String],
-  rating: Option[Double],
-  votes: Option[Int],
+  rating: Double,
+  votes: Int,
   revenue: Option[Double],
   budget : Option[Double],
-  language: Option[String] 
+  language: String 
 )
 
 case class MovieStats(

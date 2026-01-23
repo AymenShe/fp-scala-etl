@@ -12,8 +12,8 @@ object ReportGenerator {
   /**
    * Génère le rapport complet
    */
-  def generateReport(movies: List[Movie]): AnalysisReport =
-    StatsCalculator.calculateResults(movies)
+  def generateReport(load: LoadResult): AnalysisReport =
+    StatsCalculator.calculateResults(load)
 
   /**
    * Écrit le rapport en JSON
@@ -25,7 +25,7 @@ object ReportGenerator {
       val parent = Option(path.getParent)
       parent.foreach(p => Files.createDirectories(p))
       Files.write(path, jsonString.getBytes(StandardCharsets.UTF_8))
-  }
+    }
     writeAttempt match {
       case scala.util.Success(_) => Right(())
       case scala.util.Failure(exception) => Left(s"Erreur d'écriture du fichier: ${exception.getMessage}")

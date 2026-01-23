@@ -2,44 +2,22 @@ package ETL
 
 object Main extends App {
 
-  println("ETL : Analyse de Films\n")
+  val filename = "data/data_dirty.json"
+
   val start = System.currentTimeMillis()
 
-  val etlResult = for {
-      // Charger données dirty pour produire le log d'erreurs détaillé
-      detailed <- DataLoader.loadMoviesDetailed("data/data_dirty.json")
-      (validFromDirty, errors) = detailed
-      _ = ErrorLogger.writeParsingErrors(errors, "output/parsing_errors.log")
-      _ = println(s"Log écrit: output/parsing_errors.log (${errors.length} erreurs)")
+  DataLoader.loadMovies(filename) match {
+    case Left(err) =>
+      println(err)
 
-      // Charger données clean pour génération de rapport
-      movies <- DataLoader.loadMovies("data/data_dirty.json")
-      _ = println(s"${movies.length} films chargés")
-
-    // Statistiques et logs demandés
-    stats = StatsCalculator.calculateStats(movies)
-    _ = {
-      println("\nSTATISTIQUES DE PARSING")
-      println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-      println(f"Entrées totales lues    : ${stats.total_movies_parsed}%d")
-      println(f"Entrées valides         : ${stats.total_movies_valid}%d")
-      println(f"Erreurs de parsing      : ${stats.parsing_errors}%d")
-      println(f"Doublons supprimés      : ${stats.duplicates_removed}%d")
-    }
-
-    report = ReportGenerator.generateReport(movies)
-    _ <- ReportGenerator.writeReport(report, "output/results.json")
-    _ = println("\nRapport écrit dans output/results.json")
-  } yield report
-
-
-  val duration = (System.currentTimeMillis() - start) / 1000.0
-  println(f"Traitement effectué en $duration%.3f secondes")
-
-  etlResult match {
-    case Right(_) =>
-      println("\nPipeline ETL terminé avec succès !")
-    case Left(error) =>
-      println(s"Erreur lors du pipeline ETL : $error")
+    case Right(load) =>
+      val report = ReportGenerator.generateReport(load)
+      ReportGenerator.writeReport(report, "output/results.json") match {
+        case Left(writeErr) =>
+          println(writeErr)
+        case Right(_) =>
+          val duration = (System.currentTimeMillis() - start) / 1000.0
+          println(f"Rapport écrit dans output/results.json ($duration%.3f s)")
+      }
   }
 }

@@ -7,30 +7,19 @@ object StatsCalculator {
   /**
    * Statistiques générales de parsing et déduplication
    */
-  def calculateStats(movies: List[Movie]): MovieStats = {
-    val totalParsed = movies.length
-    // invalid entries based on validation rules (without considering duplicates)
-    val invalidCount = movies.count(m => !DataValidator.isValid(m))
-    // compute unique valid movies count
-    val totalValid = movies.filter(DataValidator.isValid).distinctBy(_.id).length
-    // duplicates count computed from raw ids
-    val distinctByIdCount = movies.map(_.id).distinct.length
-    val duplicatesRemoved = totalParsed - distinctByIdCount
-    // parsing errors should reflect only invalid data, not duplicates
-    val parsingErrors = invalidCount
+  def calculateStats(load: LoadResult): MovieStats = {
+    val validMovies = load.movies.filter(DataValidator.isValid)
+    val totalValidDistinct = validMovies.distinctBy(_.id).length
+    val validationErrors = load.movies.length - validMovies.length
+    val parsingErrors = load.decodingErrors + validationErrors
+    val duplicatesRemoved = validMovies.length - validMovies.map(_.id).distinct.length
 
-    val stats = MovieStats(
-      total_movies_parsed = totalParsed,
-      total_movies_valid = totalValid,
+    MovieStats(
+      total_movies_parsed = load.totalEntries,
+      total_movies_valid = totalValidDistinct,
       parsing_errors = parsingErrors,
       duplicates_removed = duplicatesRemoved
     )
-    // // Logs basiques du pipeline ETL
-    // println(s"[ETL] Entrées lues: ${stats.total_movies_parsed}")
-    // println(s"[ETL] Entrées valides: ${stats.total_movies_valid}")
-    // println(s"[ETL] Erreurs: ${stats.parsing_errors}")
-    // println(s"[ETL] Doublons supprimés: ${stats.duplicates_removed}")
-    stats
   }
 
   /**
@@ -39,14 +28,14 @@ object StatsCalculator {
   def topRated(movies: List[Movie], n: Int = 10, minVotes: Int = 10000): Seq[MovieSummary] = {
     DataValidator
       .filterValid(movies)
-      .filter(m => m.votes.getOrElse(0) >= minVotes)
-      .sortBy(m => (-m.rating.getOrElse(0.0), -m.votes.getOrElse(0)))
+      .filter(m => m.votes >= minVotes)
+      .sortBy(m => (-m.rating, -m.votes))
       .take(n)
       .map(m => MovieSummary(
-        m.title.headOption.getOrElse(""),
-        m.year.getOrElse(0),
-        round2(m.rating.getOrElse(0.0)),
-        m.votes.getOrElse(0)
+        m.title,
+        m.year,
+        round2(m.rating),
+        m.votes
       ))
   }
 
@@ -56,13 +45,13 @@ object StatsCalculator {
   def topByVotes(movies: List[Movie], n: Int = 10): Seq[MovieSummary] = {
     DataValidator
       .filterValid(movies)
-      .sortBy(m => -m.votes.getOrElse(0))
+      .sortBy(m => -m.votes)
       .take(n)
       .map(m => MovieSummary(
-        m.title.headOption.getOrElse(""),
-        m.year.getOrElse(0),
-        round2(m.rating.getOrElse(0.0)),
-        m.votes.getOrElse(0)
+        m.title,
+        m.year,
+        round2(m.rating),
+        m.votes
       ))
   }
 
@@ -76,10 +65,10 @@ object StatsCalculator {
       .sortBy(m => -m.revenue.getOrElse(0.0))
       .take(n)
       .map(m => MovieGrossingSummary(
-        m.title.headOption.getOrElse(""),
-        m.year.getOrElse(0),
-        round2(m.rating.getOrElse(0.0)),
-        m.votes.getOrElse(0),
+        m.title,
+        m.year,
+        round2(m.rating),
+        m.votes,
         round2(m.revenue.getOrElse(0.0))
       ))
   }
@@ -94,10 +83,10 @@ object StatsCalculator {
       .sortBy(m => -m.budget.getOrElse(0.0))
       .take(n)
       .map(m => MovieSummary(
-        m.title.headOption.getOrElse(""),
-        m.year.getOrElse(0),
-        round2(m.rating.getOrElse(0.0)),
-        m.votes.getOrElse(0)
+        m.title,
+        m.year,
+        round2(m.rating),
+        m.votes
       ))
   }
 
@@ -111,7 +100,7 @@ object StatsCalculator {
     }
     DataValidator
       .filterValid(movies)
-      .flatMap(m => m.year.map(decadeLabel))
+      .map(m => decadeLabel(m.year))
       .groupBy(identity)
       .view
       .mapValues(_.length)
@@ -137,7 +126,7 @@ object StatsCalculator {
   def averageRatingByGenre(movies: List[Movie]): Map[String, Double] = {
     val pairs: List[(String, Double)] = DataValidator
       .filterValid(movies)
-      .flatMap(m => m.rating.toList.flatMap(r => m.genres.map(g => (g, r))))
+      .flatMap(m => m.genres.map(g => (g, m.rating)))
     val byGenre = pairs.groupBy(_._1)
     byGenre.view.mapValues { xs =>
       val ratings = xs.map(_._2)
@@ -151,7 +140,7 @@ object StatsCalculator {
   def averageRuntimeByGenre(movies: List[Movie]): Map[String, Double] = {
     val pairs: List[(String, Double)] = DataValidator
       .filterValid(movies)
-      .flatMap(m => m.runtime.toList.flatMap(rt => m.genres.map(g => (g, rt.toDouble))))
+      .flatMap(m => m.genres.map(g => (g, m.runtime.toDouble)))
     val byGenre = pairs.groupBy(_._1)
     byGenre.view.mapValues { xs =>
       val runtimes = xs.map(_._2)
@@ -165,7 +154,7 @@ object StatsCalculator {
   def mostProlificDirectors(movies: List[Movie], top: Int = 5): Seq[ProlificDirector] = {
     DataValidator
       .filterValid(movies)
-      .flatMap(_.director.toList)
+      .map(_.director)
       .groupBy(identity)
       .view
       .mapValues(_.length)
@@ -209,9 +198,10 @@ object StatsCalculator {
   /**
    * Assemble tous les résultats dans un `AnalysisReport`
    */
-  def calculateResults(movies: List[Movie]): AnalysisReport = {
+  def calculateResults(load: LoadResult): AnalysisReport = {
+    val movies = load.movies
     AnalysisReport(
-      statistics = calculateStats(movies),
+      statistics = calculateStats(load),
       top_10_rated = topRated(movies, 10),
       top_10_by_votes = topByVotes(movies, 10),
       highest_grossing = highestGrossing(movies, 10),
