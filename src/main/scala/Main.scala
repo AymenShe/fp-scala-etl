@@ -8,8 +8,8 @@ object Main extends App {
       // Charger données dirty pour produire le log d'erreurs détaillé
       detailed <- DataLoader.loadMoviesDetailed("data/data_large.json")
       (validFromDirty, errors) = detailed
-      _ = ErrorLogger.writeParsingErrors(errors, "parsing_errors.log")
-      _ = println(s"Log écrit: parsing_errors.log (${errors.length} erreurs)")
+      _ = ErrorLogger.writeParsingErrors(errors, "output/parsing_errors.log")
+      _ = println(s"Log écrit: output/parsing_errors.log (${errors.length} erreurs)")
 
       // Charger données clean pour génération de rapport
       movies <- DataLoader.loadMovies("data/data_large.json")
@@ -27,8 +27,8 @@ object Main extends App {
     }
 
     report = ReportGenerator.generateReport(movies)
-    _ <- ReportGenerator.writeReport(report, "results.json")
-    _ = println("Rapport écrit dans results.json")
+    _ <- ReportGenerator.writeReport(report, "output/results.json")
+    _ = println("Rapport écrit dans output/results.json")
   } yield report
 
   etlResult match {

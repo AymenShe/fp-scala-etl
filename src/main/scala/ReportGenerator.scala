@@ -19,13 +19,12 @@ object ReportGenerator {
    * Écrit le rapport en JSON
    */
   def writeReport(report: AnalysisReport, filename: String): Either[String, Unit] = {
-    // TODO: 
-    //   1. Convertir en JSON : report.asJson.spaces2
-    //   2. Écrire dans le fichier avec Files.write
-    //   3. Gérer les erreurs avec Try
     val jsonString = report.asJson.spaces2
     val writeAttempt = Try {
-      Files.write(Paths.get(filename), jsonString.getBytes(StandardCharsets.UTF_8))
+      val path = Paths.get(filename)
+      val parent = Option(path.getParent)
+      parent.foreach(p => Files.createDirectories(p))
+      Files.write(path, jsonString.getBytes(StandardCharsets.UTF_8))
   }
     writeAttempt match {
       case scala.util.Success(_) => Right(())

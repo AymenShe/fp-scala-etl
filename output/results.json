@@ -282,28 +282,28 @@
     "Comedy" : 3600
   },
   "average_rating_by_genre" : {
-    "Thriller" : 7.677419354838729,
-    "Horror" : 8.140000000000006,
-    "Romance" : 7.790000000000056,
-    "Drama" : 7.448000000000164,
-    "Mystery" : 7.5454545454544695,
-    "Sci-Fi" : 7.3500000000000165,
-    "Adventure" : 7.637500000000011,
-    "Action" : 7.429999999999946,
-    "Biography" : 7.083333333333285,
-    "Comedy" : 7.64166666666653
+    "Thriller" : 7.68,
+    "Horror" : 8.14,
+    "Romance" : 7.79,
+    "Drama" : 7.45,
+    "Mystery" : 7.55,
+    "Sci-Fi" : 7.35,
+    "Adventure" : 7.64,
+    "Action" : 7.43,
+    "Biography" : 7.08,
+    "Comedy" : 7.64
   },
   "average_runtime_by_genre" : {
-    "Thriller" : 130.48387096774192,
+    "Thriller" : 130.48,
     "Horror" : 136.1,
     "Romance" : 146.15,
     "Drama" : 128.84,
-    "Mystery" : 118.45454545454545,
-    "Sci-Fi" : 134.08333333333334,
+    "Mystery" : 118.45,
+    "Sci-Fi" : 134.08,
     "Adventure" : 138.25,
-    "Action" : 136.53333333333333,
-    "Biography" : 130.66666666666666,
-    "Comedy" : 142.41666666666666
+    "Action" : 136.53,
+    "Biography" : 130.67,
+    "Comedy" : 142.42
   },
   "most_prolific_directors" : [
     {
@@ -351,6 +351,6 @@
   ],
   "profitable_movies" : {
     "count" : 5850,
-    "average_roi" : 23.78306383721623
+    "average_roi" : 23.78
   }
 }

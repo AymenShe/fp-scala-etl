@@ -6,18 +6,6 @@ object DataValidator {
    * Valide un film selon les règles métier
    */
   def isValid(movie: Movie): Boolean = {
-    // TODO: Vérifier que :
-    //   - title est non vide
-    //   - year est non vide entre 1895 et 2025
-    //   - runtime est > 0
-    //   - genres est non vide
-    //   - director est non vide
-    //   - cast est non vide
-    //   - rating est entre 0.0 et 10.0
-    //   - votes est >= 0
-    //   - revenue est >= 0.0
-    //   - budget est >= 0.0 et non null
-    //   - language est non vide
     movie.title.nonEmpty &&
     movie.year.exists(y => y >= 1895 && y <= 2025) &&
     movie.runtime.exists(_ > 0) &&

@@ -1,6 +1,9 @@
 package ETL
 
 object StatsCalculator {
+  private def round2(d: Double): Double =
+    BigDecimal(d).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
+
 
   /**
    * Statistiques générales de parsing et déduplication
@@ -36,7 +39,12 @@ object StatsCalculator {
       .filter(m => m.votes.getOrElse(0) >= minVotes)
       .sortBy(m => (-m.rating.getOrElse(0.0), -m.votes.getOrElse(0)))
       .take(n)
-      .map(m => MovieSummary(m.title.headOption.getOrElse(""), m.year.getOrElse(0), m.rating.getOrElse(0.0), m.votes.getOrElse(0)))
+      .map(m => MovieSummary(
+        m.title.headOption.getOrElse(""),
+        m.year.getOrElse(0),
+        round2(m.rating.getOrElse(0.0)),
+        m.votes.getOrElse(0)
+      ))
   }
 
   /**
@@ -47,7 +55,12 @@ object StatsCalculator {
       .filterValid(movies)
       .sortBy(m => -m.votes.getOrElse(0))
       .take(n)
-      .map(m => MovieSummary(m.title.headOption.getOrElse(""), m.year.getOrElse(0), m.rating.getOrElse(0.0), m.votes.getOrElse(0)))
+      .map(m => MovieSummary(
+        m.title.headOption.getOrElse(""),
+        m.year.getOrElse(0),
+        round2(m.rating.getOrElse(0.0)),
+        m.votes.getOrElse(0)
+      ))
   }
 
   /**
@@ -59,7 +72,13 @@ object StatsCalculator {
       .filter(m => m.revenue.exists(_ > 0.0))
       .sortBy(m => -m.revenue.getOrElse(0.0))
       .take(n)
-      .map(m => MovieGrossingSummary(m.title.headOption.getOrElse(""), m.year.getOrElse(0), m.rating.getOrElse(0.0), m.votes.getOrElse(0), m.revenue.getOrElse(0.0)))
+      .map(m => MovieGrossingSummary(
+        m.title.headOption.getOrElse(""),
+        m.year.getOrElse(0),
+        round2(m.rating.getOrElse(0.0)),
+        m.votes.getOrElse(0),
+        round2(m.revenue.getOrElse(0.0))
+      ))
   }
 
   /**
@@ -71,7 +90,12 @@ object StatsCalculator {
       .filter(m => m.budget.exists(_ > 0.0))
       .sortBy(m => -m.budget.getOrElse(0.0))
       .take(n)
-      .map(m => MovieSummary(m.title.headOption.getOrElse(""), m.year.getOrElse(0), m.rating.getOrElse(0.0), m.votes.getOrElse(0)))
+      .map(m => MovieSummary(
+        m.title.headOption.getOrElse(""),
+        m.year.getOrElse(0),
+        round2(m.rating.getOrElse(0.0)),
+        m.votes.getOrElse(0)
+      ))
   }
 
   /**
@@ -114,7 +138,7 @@ object StatsCalculator {
     val byGenre = pairs.groupBy(_._1)
     byGenre.view.mapValues { xs =>
       val ratings = xs.map(_._2)
-      ratings.sum / ratings.length
+      round2(ratings.sum / ratings.length)
     }.toMap
   }
 
@@ -128,7 +152,7 @@ object StatsCalculator {
     val byGenre = pairs.groupBy(_._1)
     byGenre.view.mapValues { xs =>
       val runtimes = xs.map(_._2)
-      runtimes.sum / runtimes.length
+      round2(runtimes.sum / runtimes.length)
     }.toMap
   }
 
@@ -176,7 +200,7 @@ object StatsCalculator {
     val count = profitable.length
     val averageRoi = if (profitable.isEmpty) 0.0
       else profitable.map(m => m.revenue.get / m.budget.get).sum / count
-    ProfitableMovies(count, averageRoi)
+    ProfitableMovies(count, round2(averageRoi))
   }
 
   /**

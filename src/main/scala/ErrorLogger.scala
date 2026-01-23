@@ -12,7 +12,10 @@ object ErrorLogger {
     }.mkString("\n")
     val content = header + body + "\n"
     try {
-      Files.write(Paths.get(filename), content.getBytes(StandardCharsets.UTF_8))
+      val path = Paths.get(filename)
+      val parent = Option(path.getParent)
+      parent.foreach(p => Files.createDirectories(p))
+      Files.write(path, content.getBytes(StandardCharsets.UTF_8))
       Right(())
     } catch {
       case ex: Throwable => Left(s"Erreur d'écriture du log: ${ex.getMessage}")
