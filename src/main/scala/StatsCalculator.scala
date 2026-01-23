@@ -65,13 +65,13 @@ object StatsCalculator {
   /**
    * Top N budgets
    */
-  def mostExpensive(movies: List[Movie], n: Int = 10): Seq[MovieSummary] = {
+  def mostExpensive(movies: List[Movie], n: Int = 10): Seq[MovieBudgetSummary] = {
     DataValidator
       .filterValid(movies)
       .filter(_.budget > 0.0)
       .sortBy(m => -m.budget)
       .take(n)
-      .map(m => MovieSummary(m.title, m.year, m.rating, m.votes))
+      .map(m => MovieBudgetSummary(m.title, m.year, m.rating, m.votes, m.budget))
   }
 
   /**

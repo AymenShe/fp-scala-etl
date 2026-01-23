@@ -37,6 +37,14 @@ case class MovieGrossingSummary(
   revenue: Double
 )
 
+case class MovieBudgetSummary(
+  title: String,
+  year: Int,
+  rating: Double,
+  votes: Int,
+  budget: Double
+)
+
 case class ProlificDirector(
   director: String,
   count: Int
@@ -57,7 +65,7 @@ case class AnalysisReport(
   top_10_rated: Seq[MovieSummary],
   top_10_by_votes: Seq[MovieSummary],
   highest_grossing: Seq[MovieGrossingSummary],
-  most_expensive: Seq[MovieSummary],
+  most_expensive: Seq[MovieBudgetSummary],
   movies_by_decade: Map[String, Int],
   movies_by_genre: Map[String, Int],
   average_rating_by_genre: Map[String, Double],

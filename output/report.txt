@@ -1,0 +1,134 @@
+
+    
+    ===============================================
+     RAPPORT D'ANALYSE - FILMS & SÉRIES
+    =============================================== 
+    
+    
+    STATISTIQUES DE PARSING
+    ---------------------------
+    - Entrées totales lues      : 100
+    - Entrées valides           : 42
+    - Erreurs de parsing        : 58
+    - Doublons supprimés        : 0
+    
+    
+    TOP 10 - MEILLEURS FILMS
+    ----------------------------
+     1. Hidden Truth 49           : 9.4/10 (2102764 votes)
+ 2. Star Voyager 52           : 9.4/10 (717638 votes)
+ 3. Broken Dreams 86          : 9.4/10 (257002 votes)
+ 4. Final Mission 73          : 9.2/10 (138959 votes)
+ 5. Office Madness 78         : 9.1/10 (2197569 votes)
+ 6. Final Hour 12             : 9.1/10 (1190115 votes)
+ 7. AI Revolution 1           : 9.0/10 (2807784 votes)
+ 8. Tomorrow's Promise 53     : 9.0/10 (1921243 votes)
+ 9. Final Mission 1           : 9.0/10 (196447 votes)
+10. Office Madness 75         : 8.7/10 (2298609 votes)
+    
+    TOP 10 - PLUS VOTÉS
+    -----------------------
+     1. Time Traveler 2           : 2942903 votes
+ 2. Steel Fury 71             : 2882917 votes
+ 3. Quantum Leap 92           : 2844850 votes
+ 4. AI Revolution 1           : 2807784 votes
+ 5. Lost Memories 98          : 2620170 votes
+ 6. Love & Chaos 29           : 2451661 votes
+ 7. Deadly Game 19            : 2386698 votes
+ 8. Cyber Reality 34          : 2344185 votes
+ 9. Night Watch 37            : 2334234 votes
+10. Office Madness 75         : 2298609 votes
+    
+    TOP 10 - BOX-OFFICE
+    -----------------------
+     1. Final Mission 73          : 1994.5 M$
+ 2. Broken Dreams 58          : 1947.9 M$
+ 3. Wedding Disaster 89       : 1900.4 M$
+ 4. Final Mission 1           : 1884.3 M$
+ 5. Mars Colony 52            : 1870.4 M$
+ 6. Dark Secrets 74           : 1755.8 M$
+ 7. Night Watch 81            : 1754.1 M$
+ 8. Laugh Out Loud 87         : 1699.7 M$
+ 9. The Last Hope 94          : 1628.4 M$
+10. Silent Killer 13          : 1587.3 M$
+    
+    TOP 10 - BUDGET
+    -----------------------
+     1. Lost Memories 84          : 338.9 M$
+ 2. Eternal Light 15          : 325.3 M$
+ 3. Silent Killer 13          : 325.0 M$
+ 4. Final Mission 1           : 322.7 M$
+ 5. Office Madness 78         : 306.5 M$
+ 6. Broken Dreams 86          : 306.0 M$
+ 7. Mars Colony 94            : 303.7 M$
+ 8. Cyber Reality 34          : 283.0 M$
+ 9. Night Watch 81            : 281.2 M$
+10. Mars Colony 20            : 264.1 M$
+    
+    RÉPARTITION PAR DÉCENNIE
+    ----------------------------
+    - 1990s : 9 films
+- 2000s : 13 films
+- 2010s : 11 films
+- 2020s : 9 films
+    
+    RÉPARTITION PAR GENRE
+    -------------------------
+    - Thriller : 17 films
+- Action : 15 films
+- Drama : 11 films
+- Romance : 7 films
+- Horror : 6 films
+- Mystery : 6 films
+- Sci-Fi : 6 films
+- Adventure : 4 films
+- Comedy : 4 films
+- Biography : 2 films
+    
+    NOTE MOYENNE PAR GENRE
+    -----------------------
+    - Romance         : 8.1/10
+- Horror          : 8.0/10
+- Comedy          : 8.0/10
+- Thriller        : 7.7/10
+- Sci-Fi          : 7.6/10
+- Action          : 7.5/10
+- Drama           : 7.2/10
+- Mystery         : 7.2/10
+- Adventure       : 7.1/10
+- Biography       : 6.8/10
+    
+    DURÉE MOYENNE PAR GENRE
+    -----------------------
+    - Romance         : 147 minutes
+- Comedy          : 146 minutes
+- Biography       : 137 minutes
+- Sci-Fi          : 136 minutes
+- Action          : 135 minutes
+- Drama           : 131 minutes
+- Horror          : 129 minutes
+- Thriller        : 129 minutes
+- Adventure       : 124 minutes
+- Mystery         : 118 minutes
+    
+    TOP 5 - RÉALISATEURS
+    ------------------------
+     1. Alfonso Cuarón            : 7 films
+ 2. Martin Scorsese           : 5 films
+ 3. David Fincher             : 4 films
+ 4. Christopher Nolan         : 4 films
+ 5. Steven Spielberg          : 3 films
+    
+    TOP 5 - ACTEURS
+    -------------------
+     1. Scarlett Johansson        : 15 films
+ 2. Leonardo DiCaprio         : 14 films
+ 3. Tom Cruise                : 14 films
+ 4. Will Smith                : 13 films
+ 5. Meryl Streep              : 12 films
+    
+    RENTABILITÉ
+    --------------
+    - Films rentables           : 39 films
+    - ROI moyen                 : 23.78x
+    
