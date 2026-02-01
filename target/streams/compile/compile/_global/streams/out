@@ -1,31 +1,4 @@
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/MovieParser.scala:49:17: type mismatch;
-[error]  found   : String
-[error]  required: List[String]
-[error]         title = title,
-[error]                 ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/MovieParser.scala:50:16: type mismatch;
-[error]  found   : Int
-[error]  required: Option[Int]
-[error]         year = year,
-[error]                ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/MovieParser.scala:51:19: type mismatch;
-[error]  found   : Int
-[error]  required: Option[Int]
-[error]         runtime = runtime,
-[error]                   ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/MovieParser.scala:53:20: type mismatch;
-[error]  found   : String
-[error]  required: Option[String]
-[error]         director = director,
-[error]                    ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/MovieParser.scala:55:18: type mismatch;
-[error]  found   : Double
-[error]  required: Option[Double]
-[error]         rating = rating,
-[error]                  ^
-[error] /Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/MovieParser.scala:59:20: type mismatch;
-[error]  found   : String
-[error]  required: Option[String]
-[error]         language = language
-[error]                    ^
-[error] 6 errors found
+[0m[[0m[31merror[0m] [0m[0m/Users/ukwattageuthum/Documents/EFREI/ING2/Functional Programming with Scala/fp-scala-etl/src/main/scala/StatsCalculator.scala:26:7: ';' expected but ')' found.[0m
+[0m[[0m[31merror[0m] [0m[0m      ))[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

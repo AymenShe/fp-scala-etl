@@ -2,39 +2,22 @@ package ETL
 
 object Main extends App {
 
-  println("ETL : Analyse de Films\n")
+  val filename = "data/data_large.json"
 
-  val etlResult = for {
-      // Charger données dirty pour produire le log d'erreurs détaillé
-      detailed <- DataLoader.loadMoviesDetailed("data/data_large.json")
-      (validFromDirty, errors) = detailed
-      _ = ErrorLogger.writeParsingErrors(errors, "parsing_errors.log")
-      _ = println(s"Log écrit: parsing_errors.log (${errors.length} erreurs)")
+  val start = System.currentTimeMillis()
 
-      // Charger données clean pour génération de rapport
-      movies <- DataLoader.loadMovies("data/data_large.json")
-      _ = println(s"${movies.length} films chargés")
+  DataLoader.loadMovies(filename) match {
+    case Left(err) =>
+      println(err)
 
-    // Statistiques et logs demandés
-    stats = StatsCalculator.calculateStats(movies)
-    _ = {
-      println("\nSTATISTIQUES DE PARSING")
-      println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-      println(f"Entrées totales lues    : ${stats.total_movies_parsed}%d")
-      println(f"Entrées valides         : ${stats.total_movies_valid}%d")
-      println(f"Erreurs de parsing      : ${stats.parsing_errors}%d")
-      println(f"Doublons supprimés      : ${stats.duplicates_removed}%d")
-    }
-
-    report = ReportGenerator.generateReport(movies)
-    _ <- ReportGenerator.writeReport(report, "results.json")
-    _ = println("Rapport écrit dans results.json")
-  } yield report
-
-  etlResult match {
-    case Right(_) =>
-      println("\nPipeline ETL terminé avec succès !")
-    case Left(error) =>
-      println(s"Erreur lors du pipeline ETL : $error")
+    case Right(load) =>
+      val report = ReportGenerator.generateReport(load)
+      ReportGenerator.writeReport(report, "output/results.json") match {
+        case Left(writeErr) =>
+          println(writeErr)
+        case Right(_) =>
+          val duration = (System.currentTimeMillis() - start) / 1000.0
+          println(f"Rapport écrit dans output/results.json \n Durée d'exécution : ($duration%.3f s)")
+      }
   }
 }
