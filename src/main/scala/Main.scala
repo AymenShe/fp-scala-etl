@@ -17,7 +17,14 @@ object Main extends App {
           println(writeErr)
         case Right(_) =>
           val duration = (System.currentTimeMillis() - start) / 1000.0
-          println(f"Rapport écrit dans output/results.json \n Durée d'exécution : ($duration%.3f s)")
+          val textReport = ReportGenerator.generateTextReport(load, report, duration)
+          ReportGenerator.writeTextReport(textReport, "output/report.txt") match {
+            case Left(txtErr) =>
+              println(txtErr)
+            case Right(_) =>
+              println("Rapports écrits dans output/results.json et output/report.txt")
+          }
+          println(f"Durée d'exécution : ($duration%.3f s)")
       }
   }
 }

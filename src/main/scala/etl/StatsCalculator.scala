@@ -5,6 +5,33 @@ object StatsCalculator {
     BigDecimal(d).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
 
   /**
+   * Top N budgets (titre, budget) — utile pour l'affichage dans report.txt.
+   */
+  def topBudgets(movies: List[Movie], n: Int = 10): Seq[(String, Double)] = {
+    DataValidator
+      .filterValid(movies)
+      .flatMap(m => m.budget.filter(_ > 0.0).map(b => (m.title, round2(b))))
+      .sortBy { case (_, budget) => -budget }
+      .take(n)
+  }
+
+  /**
+   * Meilleur ROI (= revenue / budget) — utile pour l'affichage dans report.txt.
+   */
+  def bestRoi(movies: List[Movie]): Option[Double] = {
+    val rois = DataValidator
+      .filterValid(movies)
+      .flatMap { m =>
+        for {
+          revenue <- m.revenue if revenue > 0.0
+          budget <- m.budget if budget > 0.0
+        } yield revenue / budget
+      }
+
+    rois.reduceOption(_ max _).map(round2)
+  }
+
+  /**
    * Statistiques générales de parsing et déduplication
    */
   def calculateStats(load: LoadResult): MovieStats = {
