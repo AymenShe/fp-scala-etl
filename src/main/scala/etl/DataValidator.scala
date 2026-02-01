@@ -25,6 +25,7 @@ object DataValidator {
   def filterValid(movies: List[Movie]): List[Movie] = {
     movies
       .filter(isValid)
+      // distinct pour garder 1 doulon par id
       .distinctBy(_.id)
   }
 }

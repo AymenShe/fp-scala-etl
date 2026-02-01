@@ -2,7 +2,7 @@ package ETL
 
 object Main extends App {
 
-  val filename = "data/data_dirty.json"
+  val filename = "data/data_large.json"
 
   val start = System.currentTimeMillis()
 
@@ -17,7 +17,7 @@ object Main extends App {
           println(writeErr)
         case Right(_) =>
           val duration = (System.currentTimeMillis() - start) / 1000.0
-          println(f"Rapport écrit dans output/results.json ($duration%.3f s)")
+          println(f"Rapport écrit dans output/results.json \n Durée d'exécution : ($duration%.3f s)")
       }
   }
 }
